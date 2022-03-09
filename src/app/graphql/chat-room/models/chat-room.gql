@@ -1,0 +1,6 @@
+
+
+#type ChatRoom {
+#  id: ID!
+#  name: String!
+#}
