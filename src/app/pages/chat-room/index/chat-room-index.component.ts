@@ -29,10 +29,7 @@ export class ChatRoomIndexComponent implements OnInit {
 
   ngOnInit() {
     this.apollo.watchQuery<any>({
-      query: GET_CHAT_ROOM,
-      variables: {
-        id: 1
-      },
+      query: GET_CHAT_ROOMS,
     })
       .valueChanges
       .subscribe(({ data, loading }) => {
