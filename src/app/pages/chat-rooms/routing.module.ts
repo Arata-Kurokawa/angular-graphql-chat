@@ -1,11 +1,15 @@
 import { NgModule } from '@angular/core'
 import { RouterModule, Routes } from '@angular/router'
-import { ChatRoomIndexComponent } from './index/chat-room-index.component'
+import { ChatRoomsComponent } from './chat-rooms.component'
+import { ChatRoomComponent } from '@app/pages/chat-rooms/room/chat-room.component'
 
 const routes: Routes = [
   {
     path: '',
-    component: ChatRoomIndexComponent
+    component: ChatRoomsComponent,
+    children: [
+      { path: 'r/:id', component: ChatRoomComponent }
+    ]
   }
 ]
 

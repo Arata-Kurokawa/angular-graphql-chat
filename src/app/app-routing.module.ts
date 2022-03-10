@@ -3,8 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {
-    path: 'chat-room',
-    loadChildren: () => import('./pages/chat-room/module').then(m => m.ChatRoomModule),
+    path: 'chat-rooms',
+    loadChildren: () => import('./pages/chat-rooms/module').then(m => m.ChatRoomModule),
   }
 ];
 
