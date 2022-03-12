@@ -3,7 +3,7 @@ import { ChatRoomsComponent } from './chat-rooms.component'
 import { ChatRoomRoutingModule } from './routing.module'
 import { CommonModule } from '@angular/common'
 import { ChatRoomComponent } from './room/chat-room.component'
-import {ReactiveFormsModule} from "@angular/forms";
+import {ReactiveFormsModule} from "@angular/forms"
 
 @NgModule({
   declarations: [

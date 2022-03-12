@@ -3,7 +3,7 @@ import {Apollo, graphql} from "apollo-angular";
 import {ActivatedRoute} from "@angular/router";
 import {Observable, Subscription} from "rxjs";
 import {ChatRoom} from "@app/models/chat-room";
-import {map} from "rxjs/operators";
+import {map, take} from "rxjs/operators";
 import {FormControl} from "@angular/forms";
 import {query} from "@angular/animations";
 
@@ -24,6 +24,16 @@ const GET_CHAT_ROOM = graphql`
 const ADD_CHAT_MESSAGE = graphql`
   mutation AddChatMessage($chatRoomId: Long!, $message: String!) {
     addChatMessage(chatRoomId: $chatRoomId, message: $message) {
+      id
+      chatRoomId
+      message
+    }
+  }
+`
+
+const ADDED_CHAT_MESSAGE = graphql`
+  subscription AddedChatMessage($chatRoomId: Long!) {
+    addedChatMessage(chatRoomId: $chatRoomId) {
       id
       chatRoomId
       message
@@ -77,11 +87,11 @@ export class ChatRoomComponent implements OnInit, OnDestroy {
             chatRoomId: this.chatRoomId,
             message: message
           }
-        }).subscribe(({ data }) => {
-          console.log('got data', data);
-        },(error) => {
-          console.log('there was an error sending the query', error);
         })
+        .pipe(
+          take(1)
+        )
+        .subscribe()
       )
     }
   }
