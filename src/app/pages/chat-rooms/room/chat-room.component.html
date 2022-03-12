@@ -1,3 +1,22 @@
-<div>
-  coming soon...
+<div class="container">
+  <div
+    *ngIf="chatRoom$ | async as chatRoom"
+    class="messages"
+  >
+    <div
+      *ngFor="let message of chatRoom.messages"
+      class="message"
+    >
+      {{ message.message }}
+    </div>
+  </div>
+
+  <div class="message-form">
+    <textarea
+      [formControl]="messageForm"
+    ></textarea>
+    <button
+      (click)="addMessage()"
+    >送信</button>
+  </div>
 </div>

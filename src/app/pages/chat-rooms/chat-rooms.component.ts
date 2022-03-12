@@ -13,22 +13,13 @@ const GET_CHAT_ROOMS = graphql`
   }
 `
 
-const GET_CHAT_ROOM = graphql`
-  query GetChatRoom($id: Long!) {
-    chatRoom(id: $id) {
-      id
-      name
-    }
-  }
-`
-
 @Component({
   templateUrl: './chat-rooms.component.html',
   styleUrls:   ['./chat-rooms.component.scss']
 })
 export class ChatRoomsComponent implements OnInit {
   chatRooms$!: Observable<ChatRoom[]>
-  
+
   constructor(private apollo: Apollo) {
   }
 

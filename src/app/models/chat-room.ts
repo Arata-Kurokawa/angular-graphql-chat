@@ -5,7 +5,10 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
+import {ChatMessage} from "./chat-message"
+
 export type ChatRoom = {
   id: number,
-  name: string
+  name: string,
+  messages: ChatMessage[]
 }
