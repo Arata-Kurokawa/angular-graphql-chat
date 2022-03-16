@@ -1,0 +1,6 @@
+
+type ChatMessage {
+  id: ID!,
+  chatRoomId: Int!,
+  message: String!
+}

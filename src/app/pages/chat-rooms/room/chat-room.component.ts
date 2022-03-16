@@ -8,7 +8,7 @@ import {FormControl} from "@angular/forms";
 import {query} from "@angular/animations";
 
 const GET_CHAT_ROOM = graphql`
-  query GetChatRoom($id: Long!) {
+  query GetChatRoom($id: Int!) {
     chatRoom(id: $id) {
       id
       name
@@ -22,7 +22,7 @@ const GET_CHAT_ROOM = graphql`
 `
 
 const ADD_CHAT_MESSAGE = graphql`
-  mutation AddChatMessage($chatRoomId: Long!, $message: String!) {
+  mutation AddChatMessage($chatRoomId: Int!, $message: String!) {
     addChatMessage(chatRoomId: $chatRoomId, message: $message) {
       id
       chatRoomId
@@ -32,8 +32,8 @@ const ADD_CHAT_MESSAGE = graphql`
 `
 
 const ADDED_CHAT_MESSAGE = graphql`
-  subscription AddedChatMessage($chatRoomId: Long!) {
-    addedChatMessage(chatRoomId: $chatRoomId) {
+  subscription AddedChatMessage($chatRoomId: Int!) {
+    onAddChatMessage(chatRoomId: $chatRoomId) {
       id
       chatRoomId
       message
