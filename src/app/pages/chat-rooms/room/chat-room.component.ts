@@ -5,10 +5,9 @@ import {Observable, Subscription} from "rxjs";
 import {ChatRoom} from "@app/models/chat-room";
 import {map, take} from "rxjs/operators";
 import {FormControl} from "@angular/forms";
-import {query} from "@angular/animations";
 
 const GET_CHAT_ROOM = graphql`
-  query GetChatRoom($id: Int!) {
+  query GetChatRoom($id: Long!) {
     chatRoom(id: $id) {
       id
       name
@@ -22,7 +21,7 @@ const GET_CHAT_ROOM = graphql`
 `
 
 const ADD_CHAT_MESSAGE = graphql`
-  mutation AddChatMessage($chatRoomId: Int!, $message: String!) {
+  mutation AddChatMessage($chatRoomId: Long!, $message: String!) {
     addChatMessage(chatRoomId: $chatRoomId, message: $message) {
       id
       chatRoomId
@@ -32,7 +31,7 @@ const ADD_CHAT_MESSAGE = graphql`
 `
 
 const ADDED_CHAT_MESSAGE = graphql`
-  subscription AddedChatMessage($chatRoomId: Int!) {
+  subscription AddedChatMessage($chatRoomId: Long!) {
     onAddChatMessage(chatRoomId: $chatRoomId) {
       id
       chatRoomId
