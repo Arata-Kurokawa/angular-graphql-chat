@@ -5,6 +5,7 @@ import {Observable, Subscription} from "rxjs";
 import {ChatRoom} from "@app/models/chat-room";
 import {map, take} from "rxjs/operators";
 import {FormControl} from "@angular/forms";
+import { webSocket } from 'rxjs/webSocket'
 
 const GET_CHAT_ROOM = graphql`
   query GetChatRoom($id: Long!) {
@@ -51,6 +52,11 @@ export class ChatRoomComponent implements OnInit, OnDestroy {
 
   messageForm = new FormControl()
 
+  webSockets = [
+    webSocket({ url : 'ws://localhost:9000/kafka/testConsumerWebSocket' }),
+    // webSocket({ url : 'ws://localhost:9001/kafka/testConsumerWebSocket' })
+  ]
+
   private subscription: Subscription = new Subscription()
 
   constructor(
@@ -70,6 +76,31 @@ export class ChatRoomComponent implements OnInit, OnDestroy {
       .pipe(
         map(({data, loading}) => data.chatRoom)
       )
+
+    this.webSockets.forEach((ws, index) => {
+      this.subscription.add(
+        ws.subscribe(data => {
+          console.log(`0${index}: ${JSON.stringify(data)}`)
+        })
+      )
+    })
+
+    // this.subscription.add(
+    //   this.apollo.subscribe({
+    //     query: ADDED_CHAT_MESSAGE,
+    //     variables: {
+    //       chatRoomId: this.chatRoomId
+    //     },
+    //     /*
+    //       accepts options like `errorPolicy` and `fetchPolicy`
+    //     */
+    //   }).subscribe((result) => {
+    //     console.log(JSON.stringify(result))
+    //     // if (result.data?.commentAdded) {
+    //     //   console.log('New comment:', result.data.commentAdded);
+    //     // }
+    //   })
+    // )
   }
 
   ngOnDestroy() {
