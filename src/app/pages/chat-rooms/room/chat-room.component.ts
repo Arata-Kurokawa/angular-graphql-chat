@@ -54,7 +54,8 @@ export class ChatRoomComponent implements OnInit, OnDestroy {
 
   webSockets = [
     webSocket({ url : 'ws://localhost:9000/kafka/testConsumerWebSocket' }),
-    // webSocket({ url : 'ws://localhost:9001/kafka/testConsumerWebSocket' })
+    // webSocket({ url : 'ws://localhost:9001/kafka/testConsumerWebSocket' }),
+    // webSocket({ url : 'ws://localhost:9002/kafka/testConsumerWebSocket' }),
   ]
 
   private subscription: Subscription = new Subscription()
