@@ -1,11 +1,10 @@
 import {Component, OnDestroy, OnInit} from '@angular/core'
-import {Apollo, graphql} from "apollo-angular";
-import {ActivatedRoute} from "@angular/router";
-import {Observable, Subscription} from "rxjs";
-import {ChatRoom} from "@app/models/chat-room";
-import {map, take} from "rxjs/operators";
-import {FormControl} from "@angular/forms";
-import { webSocket } from 'rxjs/webSocket'
+import {Apollo, graphql} from "apollo-angular"
+import {ActivatedRoute} from "@angular/router"
+import {Observable, Subscription} from "rxjs"
+import {ChatRoom} from "@app/models/chat-room"
+import {map, take} from "rxjs/operators"
+import {FormControl} from "@angular/forms"
 
 const GET_CHAT_ROOM = graphql`
   query GetChatRoom($id: Long!) {
@@ -52,11 +51,11 @@ export class ChatRoomComponent implements OnInit, OnDestroy {
 
   messageForm = new FormControl()
 
-  webSockets = [
-    webSocket({ url : 'ws://localhost:9000/kafka/testConsumerWebSocket' }),
-    // webSocket({ url : 'ws://localhost:9001/kafka/testConsumerWebSocket' }),
-    // webSocket({ url : 'ws://localhost:9002/kafka/testConsumerWebSocket' }),
-  ]
+  // webSockets = [
+  //   webSocket({ url : 'ws://localhost:9000/kafka/consumer' }),
+  //   // webSocket({ url : 'ws://localhost:9001/kafka/testConsumerWebSocket' }),
+  //   // webSocket({ url : 'ws://localhost:9002/kafka/testConsumerWebSocket' }),
+  // ]
 
   private subscription: Subscription = new Subscription()
 
@@ -78,13 +77,13 @@ export class ChatRoomComponent implements OnInit, OnDestroy {
         map(({data, loading}) => data.chatRoom)
       )
 
-    this.webSockets.forEach((ws, index) => {
-      this.subscription.add(
-        ws.subscribe(data => {
-          console.log(`0${index}: ${JSON.stringify(data)}`)
-        })
-      )
-    })
+    // this.webSockets.forEach((ws, index) => {
+    //   this.subscription.add(
+    //     ws.subscribe(data => {
+    //       console.log(`0${index}: ${JSON.stringify(data)}`)
+    //     })
+    //   )
+    // })
 
     // this.subscription.add(
     //   this.apollo.subscribe({

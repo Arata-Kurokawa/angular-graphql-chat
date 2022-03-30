@@ -1,0 +1,40 @@
+<h2>received messages</h2>
+
+<div
+  *ngIf="messages$ | async as messages"
+>
+  <div
+    *ngFor="let message of messages"
+  >
+    {{ message }}
+  </div>
+</div>
+
+<div
+  *ngIf="errorMessage"
+>
+  {{ errorMessage }}
+</div>
+
+<div>
+  <button
+    (click)="login()"
+  >ログイン</button>
+
+  <button
+    (click)="logout()"
+  >ログアウト</button>
+</div>
+
+<div>
+  <textarea
+    [formControl]="messageForm"
+  >
+  </textarea>
+
+  <button
+    (click)="sendMessage()"
+  >
+    メッセージ送信
+  </button>
+</div>
